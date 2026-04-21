@@ -922,6 +922,118 @@ input[type="file"] {
 }
 
 /* =========================
+   THANK YOU PAGE
+========================= */
+.thankyou-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fffdf5, #f7f7f7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+}
+
+.thank-you-wrapper {
+    width: 100%;
+    max-width: 720px;
+}
+
+.thank-you-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 50px 35px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.thank-you-card .site-logo {
+    width: 120px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 16px;
+}
+
+.check-icon {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 22px;
+    background: var(--primary-yellow);
+    color: var(--primary-black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(244, 194, 13, 0.35);
+}
+
+.thank-you-title {
+    font-size: 38px;
+    color: var(--primary-black);
+    margin-bottom: 14px;
+    line-height: 1.2;
+}
+
+.thank-you-title .highlight {
+    color: var(--primary-yellow);
+}
+
+.thank-you-text {
+    font-size: 18px;
+    color: var(--text-dark);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.thank-you-text strong {
+    color: var(--primary-black);
+}
+
+.thank-you-actions {
+    margin-top: 28px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.thank-you-actions .book-btn,
+.thank-you-actions .admin-link-btn {
+    width: auto;
+    min-width: 220px;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .thank-you-card {
+        padding: 35px 22px;
+        border-radius: 20px;
+    }
+
+    .thank-you-title {
+        font-size: 28px;
+    }
+
+    .thank-you-text {
+        font-size: 16px;
+    }
+
+    .thank-you-actions {
+        flex-direction: column;
+    }
+
+    .thank-you-actions .book-btn,
+    .thank-you-actions .admin-link-btn {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 992px) {
