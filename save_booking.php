@@ -16,6 +16,11 @@ $appointment_date = trim($_POST['appointment_date'] ?? '');
 $start_time = trim($_POST['start_time'] ?? '');
 $booking_note = trim($_POST['booking_note'] ?? '');
 
+/*
+|--------------------------------------------------------------------------
+| REQUIRED VALIDATION
+|--------------------------------------------------------------------------
+*/
 if (
     $full_name === '' ||
     $phone === '' ||
@@ -28,6 +33,11 @@ if (
     die("Please fill all required fields.");
 }
 
+/*
+|--------------------------------------------------------------------------
+| FILE UPLOAD
+|--------------------------------------------------------------------------
+*/
 $uploadedFileName = null;
 
 if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] !== UPLOAD_ERR_NO_FILE) {
@@ -66,6 +76,11 @@ if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] !== UPLOAD_ER
 try {
     $pdo->beginTransaction();
 
+    /*
+    |--------------------------------------------------------------------------
+    | FIND OR CREATE CUSTOMER
+    |--------------------------------------------------------------------------
+    */
     $customer_id = null;
 
     if ($email !== '') {
@@ -103,6 +118,11 @@ try {
         $customer_id = $pdo->lastInsertId();
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | FIND OR CREATE PET
+    |--------------------------------------------------------------------------
+    */
     $findPetStmt = $pdo->prepare("
         SELECT pet_id
         FROM pets
@@ -139,6 +159,11 @@ try {
         $pet_id = $pdo->lastInsertId();
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | GET SERVICE
+    |--------------------------------------------------------------------------
+    */
     $serviceStmt = $pdo->prepare("
         SELECT service_name, price
         FROM services
@@ -155,6 +180,11 @@ try {
 
     $total_price = $service['price'];
 
+    /*
+    |--------------------------------------------------------------------------
+    | INSERT APPOINTMENT
+    |--------------------------------------------------------------------------
+    */
     $appointmentStmt = $pdo->prepare("
         INSERT INTO appointments (
             customer_id,
@@ -182,6 +212,11 @@ try {
 
     $appointment_id = $pdo->lastInsertId();
 
+    /*
+    |--------------------------------------------------------------------------
+    | INSERT APPOINTMENT SERVICE
+    |--------------------------------------------------------------------------
+    */
     $appointmentServiceStmt = $pdo->prepare("
         INSERT INTO appointment_services (
             appointment_id,
@@ -199,7 +234,7 @@ try {
 
     $pdo->commit();
 
-    header("Location: booking.php?success=1");
+    header("Location: thank_you.php?name=" . urlencode($full_name));
     exit;
 
 } catch (Exception $e) {

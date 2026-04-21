@@ -22,12 +22,6 @@ $services = $pdo->query("SELECT * FROM services WHERE is_active = 1 ORDER BY ser
             <p class="tagline">Where Pets Glow</p>
         </div>
 
-        <?php if (isset($_GET['success']) && $_GET['success'] == '1'): ?>
-            <div class="success-message">
-                Your appointment has been booked successfully!
-            </div>
-        <?php endif; ?>
-
         <form id="bookingForm" class="booking-form" method="POST" action="save_booking.php" enctype="multipart/form-data">
 
             <div class="section-title">
@@ -100,7 +94,7 @@ $services = $pdo->query("SELECT * FROM services WHERE is_active = 1 ORDER BY ser
                     <p class="empty-slot-text">Please select a date to view time slots.</p>
                 </div>
             </div>
-            
+
             <input type="hidden" name="start_time" id="start_time">
 
             <div class="form-group">
